@@ -128,13 +128,13 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     pk->Program_VF_Overrides[RING] =      1;    // Enable programming of VF
                                                 // Overrides for Ring / Cache
 
-    pk->Program_VF_Overrides[UNCORE] =    0;    // Enable programming of VF
+    pk->Program_VF_Overrides[UNCORE] =    1;    // Enable programming of VF
                                                 // Overrides for Uncore (SA)
 
-    pk->Program_VF_Overrides[GTSLICE] =   0;    // Enable programming of VF
+    pk->Program_VF_Overrides[GTSLICE] =   1;    // Enable programming of VF
                                                 // Overrides for GT Slice
 
-    pk->Program_VF_Overrides[GTUNSLICE] = 0;    // Enable programming of VF
+    pk->Program_VF_Overrides[GTUNSLICE] = 1;    // Enable programming of VF
                                                 // Overrides for GT Unslice
 
     ///
@@ -145,7 +145,7 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
                                                 // V_OVERRIDE =  Override
 
     pk->Domain[IACORE].TargetVolts =  0;        // in mV (absolute)
-    pk->Domain[IACORE].OffsetVolts = -125;      // in mV (negative = undervolt)
+    pk->Domain[IACORE].OffsetVolts = -145;      // in mV (negative = undervolt)
 
     ///
     /// V/F OVERRIDES FOR DOMAIN: RING
@@ -166,27 +166,20 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
                                                // V_OVERRIDE  = Override
 
     pk->Domain[RING].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[RING].OffsetVolts = -125;       // in mV (negative = undervolt)
+    pk->Domain[RING].OffsetVolts = -145;       // in mV (negative = undervolt)
 
-
-    ///
     /// V/F OVERRIDES FOR DOMAIN: SA
-    ///
-    
-    // Add your adjustments here if needed    
+    pk->Domain[UNCORE].TargetVolts = 0;          // in mV (absolute)
+    pk->Domain[UNCORE].OffsetVolts = -30;       // in mV (negative = undervolt)
 
-    ///
     /// V/F OVERRIDES FOR DOMAIN: GT SLICE
-    ///
+    pk->Domain[GTSLICE].TargetVolts = 0;          // in mV (absolute)
+    pk->Domain[GTSLICE].OffsetVolts = -35;       // in mV (negative = undervolt)
 
-    // Add your adjustments here if needed
-
-    ///
     /// V/F OVERRIDES FOR DOMAIN: GT UNSLICE
-    ///
-
-    // Add your adjustments here if needed
-
+    pk->Domain[GTSLICE].TargetVolts = 0;          // in mV (absolute)
+    pk->Domain[GTSLICE].OffsetVolts = -35;       // in mV (negative = undervolt)
+    
     ///////////////////////////
     /// V/F Curve Adjustment //
     ///////////////////////////
@@ -272,7 +265,7 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     // (e.g. 1C, 2C, 4C, 8C, = use this ratio). Remove or set to 0
     // if you do not wish to set it
 
-    pk->ForcedRatioForAllCoreCounts = 51;
+    pk->ForcedRatioForAllCoreCounts = 41;
 
     /////////////////////
     /// Power Control ///
@@ -362,8 +355,8 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     
     pk->EnableMsrPkgPL1 = 1;                // Enable PL1 
     pk->EnableMsrPkgPL2 = 1;                // Enable PL2
-    pk->MsrPkgPL1_Power = MAX_POWAH;        // PL1 in mW or MAX_POWAH
-    pk->MsrPkgPL2_Power = MAX_POWAH;        // PL2 in mW or MAX_POWAH
+    pk->MsrPkgPL1_Power = 80000;        // PL1 in mW or MAX_POWAH
+    pk->MsrPkgPL2_Power = 70000;        // PL2 in mW or MAX_POWAH
     pk->MsrPkgPL_Time =   MAX_POWAH;        // Tau in ms or MAX_POWAH
     pk->ClampMsrPkgPL =   1;                // Allow clamping
     pk->LockMsrPkgPL12 =  1;                // Lock after programming
@@ -373,8 +366,8 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
 
     pk->EnableMmioPkgPL1 = 1;               // Enable MMIO PL1
     pk->EnableMmioPkgPL2 = 1;               // Enable MMIO PL2
-    pk->MmioPkgPL1_Power = MAX_POWAH;       // MMIO PL1 in mW or MAX_POWAH
-    pk->MmioPkgPL2_Power = MAX_POWAH;       // MMIO PL2 in mW or MAX_POWAH
+    pk->MmioPkgPL1_Power = 80000;       // MMIO PL1 in mW or MAX_POWAH
+    pk->MmioPkgPL2_Power = 70000;       // MMIO PL2 in mW or MAX_POWAH
     pk->MmioPkgPL_Time   = MAX_POWAH;       // Tau in ms or MAX_POWAH
     pk->ClampMmioPkgPL =   1;               // Allow clamping
     pk->LockMmioPkgPL12 =  1;               // Lock after programming
@@ -384,8 +377,8 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
 
     pk->EnablePlatformPL1 = 1;              // Enable PSys PL1 
     pk->EnablePlatformPL2 = 1;              // Enable PSys PL2
-    pk->PlatformPL1_Power = MAX_POWAH;      // PSys PL1 in mW or MAX_POWAH
-    pk->PlatformPL_Time =   MAX_POWAH;      // RAW VALUE 0-127 (or MAX_POWAH)
+    pk->PlatformPL1_Power = 80000;      // PSys PL1 in mW or MAX_POWAH
+    pk->PlatformPL_Time =   70000;      // RAW VALUE 0-127 (or MAX_POWAH)
     pk->PlatformPL2_Power = MAX_POWAH;      // PSys PL2 in mW or MAX_POWAH
     pk->ClampPlatformPL =   1;              // Allow clamping
     pk->LockPlatformPL =    1;              // Lock after programming
