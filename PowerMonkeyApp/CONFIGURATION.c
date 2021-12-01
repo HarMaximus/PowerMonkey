@@ -145,7 +145,7 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
                                                 // V_OVERRIDE =  Override
 
     pk->Domain[IACORE].TargetVolts =  0;        // in mV (absolute)
-    pk->Domain[IACORE].OffsetVolts = -145;      // in mV (negative = undervolt)
+    pk->Domain[IACORE].OffsetVolts = -35;      // in mV (negative = undervolt)
 
     ///
     /// V/F OVERRIDES FOR DOMAIN: RING
@@ -166,19 +166,19 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
                                                // V_OVERRIDE  = Override
 
     pk->Domain[RING].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[RING].OffsetVolts = -145;       // in mV (negative = undervolt)
+    pk->Domain[RING].OffsetVolts = -35;       // in mV (negative = undervolt)
 
     /// V/F OVERRIDES FOR DOMAIN: SA
     pk->Domain[UNCORE].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[UNCORE].OffsetVolts = -30;       // in mV (negative = undervolt)
+    pk->Domain[UNCORE].OffsetVolts = -20;       // in mV (negative = undervolt)
 
     /// V/F OVERRIDES FOR DOMAIN: GT SLICE
     pk->Domain[GTSLICE].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[GTSLICE].OffsetVolts = -35;       // in mV (negative = undervolt)
+    pk->Domain[GTSLICE].OffsetVolts = -30;       // in mV (negative = undervolt)
 
     /// V/F OVERRIDES FOR DOMAIN: GT UNSLICE
     pk->Domain[GTSLICE].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[GTSLICE].OffsetVolts = -35;       // in mV (negative = undervolt)
+    pk->Domain[GTSLICE].OffsetVolts = -30;       // in mV (negative = undervolt)
     
     ///////////////////////////
     /// V/F Curve Adjustment //
@@ -253,8 +253,11 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     //
     // IccMax Values
     
-    pk->Domain[IACORE].IccMax = 
-      pk->Domain[RING].IccMax = MAX_AMPS;      // 1/4 Amps Unit or MAX_AMPS
+    pk->Domain[IACORE].IccMax = 128;      // Referenced from Throttlestop. Not using MAX_AMPS
+    pk->Domain[RING].IccMax = 128;        // Referenced from Throttlestop. Not using MAX_AMPS
+    pk->Domain[UNCORE].IccMax = 11;       // Referenced from Throttlestop. Not using MAX_AMPS
+    pk->Domain[GTSLICE].IccMax = 32;      // Referenced from Throttlestop. Not using MAX_AMPS
+    pk->Domain[GTUNSLICE].IccMax = 32;    // Referenced from Throttlestop. Not using MAX_AMPS
 
     ////////////////////
     /// Turbo Ratios ///
@@ -265,7 +268,7 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     // (e.g. 1C, 2C, 4C, 8C, = use this ratio). Remove or set to 0
     // if you do not wish to set it
 
-    pk->ForcedRatioForAllCoreCounts = 41;
+    pk->ForcedRatioForAllCoreCounts = 0;
 
     /////////////////////
     /// Power Control ///
