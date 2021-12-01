@@ -177,8 +177,8 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
     pk->Domain[GTSLICE].OffsetVolts = -30;       // in mV (negative = undervolt)
 
     /// V/F OVERRIDES FOR DOMAIN: GT UNSLICE
-    pk->Domain[GTSLICE].TargetVolts = 0;          // in mV (absolute)
-    pk->Domain[GTSLICE].OffsetVolts = -30;       // in mV (negative = undervolt)
+    pk->Domain[GTUNSLICE].TargetVolts = 0;          // in mV (absolute)
+    pk->Domain[GTUNSLICE].OffsetVolts = -30;       // in mV (negative = undervolt)
     
     ///////////////////////////
     /// V/F Curve Adjustment //
@@ -246,9 +246,9 @@ VOID ApplyComputerOwnersPolicy(IN PLATFORM* sys)
 
     pk->Program_IccMax[RING] =      1;  // Enable IccMax override for Ring/$
     pk->Program_IccMax[IACORE] =    1;  // Enable IccMax override for IA Cores
-    pk->Program_IccMax[UNCORE] =    0;  // Enable IccMax override for SA/Uncore
-    pk->Program_IccMax[GTSLICE] =   0;  // Enable IccMax override for GT Slice
-    pk->Program_IccMax[GTUNSLICE] = 0;  // Enable IccMax override for GT Unslice
+    pk->Program_IccMax[UNCORE] =    1; // Enable IccMax override for SA/Uncore
+    pk->Program_IccMax[GTSLICE] =   1; // Enable IccMax override for GT Slice
+    pk->Program_IccMax[GTUNSLICE] = 1; // Enable IccMax override for GT Unslice
 
     //
     // IccMax Values
